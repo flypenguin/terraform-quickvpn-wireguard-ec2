@@ -27,12 +27,12 @@ data "template_file" "cloud_config" {
   template = "${file("${path.module}/resources/cloud-config-aws.sh")}"
 
   vars {
-    WG_PKEY          = "${var.wg_server_private_key}"
-    NET_ADDR         = "${local.server_link_ipaddress}"
-    NET_MASK         = "${local.net_bitmask}"
-    NET_PORT         = "${var.listen_port}"
-    PEER_ALLOWED_IPS = "${local.client_link_ipaddress}"
-    PEER_KEY         = "${var.wg_client_public_key}"
+    WG_PKEY               = "${var.wg_server_private_key}"
+    SERVER_LINK_IPADDRESS = "${local.server_link_ipaddress}"
+    LINK_NETMASK          = "${local.net_bitmask}"
+    NET_PORT              = "${var.listen_port}"
+    PEER_ALLOWED_IPS      = "${local.client_link_ipaddress}"
+    PEER_KEY              = "${var.wg_client_public_key}"
   }
 }
 
@@ -42,10 +42,11 @@ data "template_file" "client_config" {
   vars {
     WG_CLIENT_PRIVATE_KEY = "${var.wg_client_private_key}"
     WG_SERVER_PUBLIC_KEY  = "${var.wg_server_public_key}"
-    CLIENT_ADDRESS        = "${local.client_link_ipaddress}"
+    WG_CLIENT_ALLOWED_IPS = "${var.client_allowed_ips}"
+    CLIENT_LINK_IPADDRESS = "${local.client_link_ipaddress}"
+    LINK_NETMASK          = "${local.net_bitmask}"
     SERVER_IP             = "${aws_spot_instance_request.instance.public_ip}"
     SERVER_PORT           = "${var.listen_port}"
-    WG_CLIENT_ALLOWED_IPS = "${var.link_cidr}"
   }
 }
 

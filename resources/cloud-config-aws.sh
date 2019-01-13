@@ -3,8 +3,8 @@
 
 # configured by cloud-config
 export WG_PKEY="${WG_PKEY}"
-export NET_ADDR="${NET_ADDR}"
-export NET_MASK="${NET_MASK}"
+export SERVER_LINK_IPADDRESS="${SERVER_LINK_IPADDRESS}"
+export LINK_NETMASK="${LINK_NETMASK}"
 export NET_PORT="${NET_PORT}"
 export PEER_ALLOWED_IPS="${PEER_ALLOWED_IPS}"
 export PEER_KEY="${PEER_KEY}"
@@ -29,7 +29,7 @@ cd /etc/wireguard
 cat > wg0.conf <<EOF
 [Interface]
 PrivateKey = $WG_PKEY
-Address = $NET_ADDR/$NET_MASK
+Address = $SERVER_LINK_IPADDRESS/$LINK_NETMASK
 ListenPort = $NET_PORT
 SaveConfig = false
 

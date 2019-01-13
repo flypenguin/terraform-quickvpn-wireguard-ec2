@@ -21,6 +21,11 @@ variable "wg_client_private_key" {
 
 # you should not need to change this
 
+variable "client_allowed_ips" {
+  default     = "0.0.0.0/0"
+  description = "Change this if you DON'T want to route all traffic over the VPN"
+}
+
 variable "listen_port" {
   default     = "51820"
   description = "the port the server listens on"
@@ -37,7 +42,7 @@ variable "spot_price" {
 }
 
 variable "vpc_cidr" {
-  default     = "172.16.1.0/24"
+  default     = "172.18.3.0/24"
   description = "the CIDR for the VPC, only change this if it conflicts with one of your networks"
 }
 
